@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String dataToCalculate = solutionTV.getText().toString();
 
         if (buttonText.equals("AC")) {
-            solutionTV.setText("0");
+            solutionTV.setText("");
             resultTV.setText("0");
             return;
         }
