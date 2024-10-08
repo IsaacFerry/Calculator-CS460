@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/dark_grey">
 
 
     <TextView
@@ -18,6 +19,7 @@
         android:textSize="32dp"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@id/result_tv"
+        android:background="#AFAFAF"
 
         />
 
@@ -31,7 +33,7 @@
         android:textSize="64dp"
         android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@id/button_layout"
-
+        android:background="#AFAFAF"
         />
 
     <LinearLayout
@@ -40,13 +42,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        >
 
         <LinearLayout
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/dark_grey"
+            >
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_c"
@@ -106,7 +111,8 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/dark_grey">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_seven"
@@ -168,7 +174,8 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/dark_grey">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_four"
@@ -231,7 +238,8 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/dark_grey">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_one"
@@ -294,6 +302,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:background="@color/dark_grey"
             >
 
 
@@ -316,7 +325,7 @@
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:layout_margin="12dp"
-                android:backgroundTint="#F44336"
+                android:backgroundTint="#FF8033"
                 android:text="0"
                 android:textColor="@color/white"
                 android:textSize="32dp"

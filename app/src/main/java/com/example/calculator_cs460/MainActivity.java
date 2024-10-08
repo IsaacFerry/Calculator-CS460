@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView resultTV, solutionTV;
@@ -24,11 +25,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MaterialButton buttonAC, buttonDot;
 
     /**
+     * Called when the activity is first created.
+     * Sets up the user interface, assigns click listeners to buttons, and initializes
+     * the necessary text views for displaying input and results.
      *
-     * @param savedInstanceState If the activity is being re-initialized after
-     *     previously being shut down then this Bundle contains the data it most
-     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
-     *
+     * @param savedInstanceState Bundle object containing the activity's previously saved state.
+     *                           If the activity has never existed before, the value is null.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +72,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
+     * Assigns a button's ID and sets a click listener to it.
      *
-     * @param btn
-     * @param id
+     * @param btn The MaterialButton instance representing the button.
+     * @param id  The ID resource of the button being assigned.
      */
     void assignID(MaterialButton btn, int id){
         btn = findViewById(id);
         btn.setOnClickListener(this);
 
     }
-
+    /**
+     * Handles the click events for the calculator buttons.
+     * Depending on the button pressed, it updates the calculation display,
+     * clears input, or calculates the result.
+     *
+     * @param view The view (button) that was clicked.
+     */
     @Override
     public void onClick(View view) {
         MaterialButton button = (MaterialButton) view;
@@ -110,7 +119,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-
+    /**
+     * Evaluates the mathematical expression entered by the user.
+     * Uses Mozilla Rhino to interpret the string as JavaScript and return the result.
+     *
+     * @param data The mathematical expression to evaluate, in string format.
+     * @return The result of the expression as a string, or "Err" if an exception occurs.
+     */
     String getResults(String data){
         try{
             Context context = Context.enter();
