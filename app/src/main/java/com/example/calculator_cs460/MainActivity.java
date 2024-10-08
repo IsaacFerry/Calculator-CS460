@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         resultTV = findViewById(R.id.result_tv);
         solutionTV = findViewById(R.id.solution_tv);
-        assignID(buttonC, R.id.button_c);
-        assignID(buttonBOpen, R.id.button_open_bracket);
-        assignID(buttonBClose, R.id.button_close_bracket);
+        assignID(buttonDot, R.id.button_decimal);
 
+
+        // number buttons
         assignID(button0, R.id.button_zero);
         assignID(button1, R.id.button_one);
         assignID(button2, R.id.button_two);
@@ -60,14 +60,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         assignID(button8, R.id.button_eight);
         assignID(button9, R.id.button_nine);
 
+        // PEMDAS
         assignID(buttonMul, R.id.button_multiply);
         assignID(buttonDiv, R.id.button_divide);
         assignID(buttonAdd, R.id.button_add);
         assignID(buttonSub, R.id.button_subtract);
         assignID(buttonEqual, R.id.button_equal);
+        assignID(buttonBOpen, R.id.button_open_bracket);
+        assignID(buttonBClose, R.id.button_close_bracket);
 
+        // clear and all clear
         assignID(buttonAC, R.id.button_all_clear);
-        assignID(buttonDot, R.id.button_decimal);
+        assignID(buttonC, R.id.button_c);
+
+
 
     }
 
@@ -95,29 +101,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String buttonText = button.getText().toString();
         String dataToCalculate = solutionTV.getText().toString();
 
-        if(buttonText.equals("AC")){
-            solutionTV.setText("");
+        if (buttonText.equals("AC")) {
+            solutionTV.setText("0");
             resultTV.setText("0");
             return;
         }
-        if(buttonText.equals("=")){
+
+        if (buttonText.equals("=")) {
             solutionTV.setText(resultTV.getText());
             return;
         }
-        if(buttonText.equals("C")){
-            dataToCalculate = dataToCalculate.substring(0,dataToCalculate.length()-1);
+
+        if (buttonText.equals("C")) {
+            // Prevent trying to remove a character from an empty string
+            if (!dataToCalculate.isEmpty()) {
+                dataToCalculate = dataToCalculate.substring(0, dataToCalculate.length() - 1);
+
+            }
         } else {
+
             dataToCalculate = dataToCalculate + buttonText;
         }
 
         solutionTV.setText(dataToCalculate);
 
         String finalResult = getResults(dataToCalculate);
-        if(!finalResult.equals("Err")){
+        if (!finalResult.equals("Err")) {
             resultTV.setText(finalResult);
         }
-
-
     }
     /**
      * Evaluates the mathematical expression entered by the user.
@@ -126,15 +137,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param data The mathematical expression to evaluate, in string format.
      * @return The result of the expression as a string, or "Err" if an exception occurs.
      */
-    String getResults(String data){
-        try{
+    String getResults(String data) {
+        try {
             Context context = Context.enter();
             context.setOptimizationLevel(-1);
             Scriptable scriptable = context.initStandardObjects();
-            return context.evaluateString(scriptable, data, "Javascrip", 1, null).toString();
 
-        }catch (Exception e){
-            return "Err";
+            Object result = context.evaluateString(scriptable, data, "Javascript", 1, null);
+
+            // Check if the result is undefined or null
+            if (result == Context.getUndefinedValue()) {
+                return "0"; // or any default value you want
+            }
+
+            return result.toString();
+
+        } catch (Exception e) {
+            return "Err"; // Handle errors gracefully
+        } finally {
+            Context.exit(); // Always exit the Rhino context
         }
     }
 
