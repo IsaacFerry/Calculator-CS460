@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Check if the result is undefined or null
             if (result == Context.getUndefinedValue()) {
+
                 return "0"; // or any default value you want
             }
 
@@ -155,10 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             return "Err"; // Handle errors gracefully
         } finally {
-            Context.exit(); // Always exit the Rhino context
+            Context.exit();
         }
     }
-
 
 }
 
